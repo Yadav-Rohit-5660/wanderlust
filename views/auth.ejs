@@ -1,0 +1,87 @@
+<%= layout("/layouts/boilerplate") %>
+<% if (error && error.length > 0) { %>
+  <p class="error"><%= error %></p>
+<% } %>
+
+<% if (success && success.length > 0) { %>
+  <p class="success"><%= success %></p>
+<% } %>
+<div class="auth-container">
+    <div class="auth-toggle">
+        <div class="auth-toggle-btns">
+            <button id="loginToggle" class="auth-toggle-btn active">Login</button>
+            <button id="signupToggle" class="auth-toggle-btn">Signup</button>
+        </div>
+
+        <!-- Login Form -->
+        <div id="loginForm" class="auth-form-container">
+            <form action="/auth/login" method="POST">
+                <div class="auth-text">
+                    <input type="email" name="email" placeholder="Email Address" required />
+                    <input type="password" name="password" placeholder="Password" required />
+                </div>
+                <div class="auth-checkbox">
+                    <div class="role-select">
+                        <label>
+                            <input
+                                type="checkbox"
+                                name="isOwner"
+                                value="true"
+                            />
+                            Login as Hospitality Partner
+                        </label>
+                    </div>
+                </div>
+                <div class="auth-btn">
+                    <button class="btn login-btn">Login</button>
+                </div>
+            </form>
+            <p>Not a member? <a href="#"><span id="switchToSignup" class="SwitchToLogin&SignUp">Signup now</span></a></p>
+        </div>
+
+        <!-- Signup Form -->
+        <div id="signupForm" class="auth-form-container hidden">
+        <form action="/auth/signup" method="POST">
+            <div class="auth-text">
+            <input type="text" name="name" placeholder="Name" required />
+
+            <!-- Email + Get OTP -->
+            <div class="auth-text otpBtnClick">
+                <input type="email" name="email" placeholder="Email Address" class="email" required />
+                <button type="button" id="getOtpBtn" class="btn btn-light btn-sm otp-btn">Get OTP</button>
+            </div>
+
+            <!-- OTP input + Verify -->
+            <div class="auth-text otpBtnClick">
+                <input type="text" name="otp" placeholder="Enter OTP" class="otp" maxlength="4" />
+                <button type="button" id="verifyOtpBtn" class="btn btn-light btn-sm otp-btn">Verify</button>
+            </div>
+
+            <!-- Password -->
+            <input type="password" name="password" placeholder="Password" required />
+            </div>
+
+            <!-- Owner checkbox -->
+            <div class="auth-checkbox">
+            <div class="role-select">
+                <label>
+                <input type="checkbox" name="isOwner" value="true" />
+                SignUp as Hospitality Partner
+                </label>
+            </div>
+            </div>
+
+                <!-- Signup button -->
+                <div class="auth-btn">
+                <button class="signup-btn" id="signupBtn" style="display:none;">Signup</button>
+                </div>
+        </form>
+
+        <p>Already a member? 
+            <a href="#"><span id="switchToLogin" class="Login-SignUp">Login now</span></a>
+        </p>
+        </div>
+    </div>
+</div>
+
+<script src="/js/script.js"></script>

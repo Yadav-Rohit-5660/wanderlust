@@ -1,0 +1,313 @@
+body {
+    font-family: "Plus Jakarta Sans", sans-serif !important;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+    background-color: #0c67a0;
+}
+
+.container {
+    flex: 1;
+}
+
+/* Navbar */
+.navbar {
+    height: 4rem;
+    background-color: #fff;
+}
+
+/* Brand icon */
+.fa-hotel {
+    color: #007474;
+    font-size: 2rem;
+}
+
+/* Nav links */
+.nav-link {
+    color: #007474 !important;
+    font-weight: 700 !important;
+}
+
+/* Logout link */
+.logout-btn {
+    text-decoration: none;
+    color: #007474;
+}
+
+/* Collapsed dropdown styling */
+@media (max-width: 768px) { /* expand-md collapses below 768px */
+  .navbar-collapse {
+    background-color: rgba(255, 255, 255, 0.95); /* opaque background */
+    padding: 10px;
+    border-radius: 5px;
+  }
+
+  .navbar-nav {
+    flex-direction: column;
+    width: 100%;
+  }
+
+  .navbar-nav .nav-link {
+    color: #000; /* ensure visible on light background */
+  }
+
+  /* Optional: highlight currentUser block at top */
+  .navbar-nav .nav-link:first-child {
+    font-weight: bold;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 4px;
+  }
+}
+
+/* Default title styling */
+.title {
+  font-size: 1.1rem; /* adjust as needed */
+}
+
+/* When viewport width is 300px or less */
+@media (max-width: 300px) {
+  .title {
+    font-size: 0.75rem; /* smaller size */
+  }
+}
+
+@media (max-width: 260px) {
+  .title {
+    font-size: 0.5rem; /* smaller size */
+  }
+}
+
+/* Footer */
+
+.f-info-links a {
+    text-decoration: none;
+    color: #222222;
+    margin-right: 0.3rem;
+    margin-left: 0.3rem;
+}
+
+.f-info-links a:hover {
+    text-decoration: underline;
+}
+
+.f-info-links,
+.f-info-socials,
+.f-info-brand {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.f-info-brand {
+    font-size: 1.25rem;
+    margin-right: 0.3rem;
+    margin-left: 0.3rem;
+}
+
+.f-info-socials i {
+    font-size: 1.5rem;
+    margin-right: 0.3rem;
+    margin-left: 0.3rem;
+}
+
+.f-info {
+    text-align: center;
+    height: 6.5rem;
+    background: #ebebeb;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: space-evenly;
+}
+
+/* Cards */
+.card-list {
+    border: none !important;
+    margin-bottom: 2rem;
+    padding: 0.5rem;
+}
+
+.card-list:hover {
+    transform: scale(1.03);
+}
+
+.card-img-top {
+    border-radius: 1rem !important;
+    width: 100% !important;
+    object-fit: cover !important;
+}
+
+.card-body {
+    padding: 0.5rem !important;
+}
+
+.listing-link {
+    text-decoration: none;
+}
+
+/* Card Effect */
+.card-img-overlay {
+    opacity: 0;
+}
+
+.card-img-overlay:hover {
+    opacity: 0.15;
+    background: gray;
+    border-radius: 1rem;
+}
+
+.title {
+    padding: 10px 20px !important;
+    border-radius: 30px !important;
+    background-color: #007474 !important;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #f4ca16 !important;
+}
+
+/* New Page & Edit Page */
+.add-btn,
+.edit-btn,
+.del-btn {
+    background-color: #fe424d !important;
+    border: none !important;
+}
+
+.add-btn,
+.edit-btn,
+.del-btn:hover {
+    opacity: 0.9;
+}
+
+/* Show Page */
+.show-img {
+    height: 45vh;
+}
+
+.card {
+    border: none !important;
+    margin-bottom: 2rem;
+    padding: 0.5rem;
+}
+
+.btns {
+    display: flex;
+}
+
+.show-card {
+    padding-left: 0;
+    padding-right: 0;
+}
+
+.show-title {
+    padding-left: 0.5rem;
+}
+
+/* Login Page & Sign Up Page */
+
+/* Make OTP buttons smaller and outlined in black */
+.otp-btn {
+  border: 1px solid #000 !important;   /* solid black border */
+  color: #000 !important;              /* black text */
+  background-color: #01a7a7 !important;   /* white background */                   /* smaller padding */
+  font-size: 0.8rem;
+  margin: 5px;                   /* smaller text */
+}
+
+.otp-btn:hover {
+    background-color: #007474 !important;
+}
+
+.otpBtnClick button:active {
+    background-color: #959393 !important;
+    transform: scale(0.95) !important;
+}
+
+.auth-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 80%;
+    max-width: 500px;   /* increase this value to make container wider */
+    margin: 0 auto;     /* keep it centered */
+    padding: 20px;      /* optional: add some inner spacing */
+
+}
+
+.auth-toggle {
+    margin-bottom: 20px;
+    background-color: #d5d5d5;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(189, 187, 187, 0.1);
+    width: 400px;
+}
+
+.auth-toggle-btns {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+
+.auth-toggle-btn {
+    width: 50%;
+    padding: 10px;
+    background-color: #959393;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    border-radius: 10px;
+    opacity: 0.8;
+}
+
+.auth-toggle-btn:hover {
+    background-color:#6f6e6e;
+    opacity: 1;
+}
+
+.auth-toggle-btn.active {
+    background: #007474;
+}
+
+.auth-form-container {
+    display: block;
+}
+
+.auth-form-container.hidden {
+    display: none;
+}
+
+.auth-form-container button {
+    padding: 8px;
+    padding-left: 20px;
+    padding-right: 20px;
+    background-color: #007474;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+}
+
+.auth-btn {
+    padding: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.auth-form-container a {
+    text-decoration: none;
+}
+
+.auth-form-container a:hover {
+    text-decoration: underline;
+}
+
+.auth-btn button:hover {
+    background-color: #015c5c;
+    color: white;
+}

@@ -1,0 +1,88 @@
+<%= layout("/layouts/boilerplate") %>
+<div class="row mt-4">
+  <div class="col-5 offset-3">
+    <h4 class="show-title"><b><%= listing.title %></b></h4>
+  </div>
+  <div class="card col-6 offset-3 show-card">
+    <img src="<%= listing.image %>" class="card-img-top show-img" alt="listing_image">
+    <div class="card-body">
+      <p class="card-text">
+        <b>&#8377;<%= listing.price.toLocaleString("en-IN") %>/Per Night</b><br/>
+        <%= listing.location %> - <%= listing.country %>
+        <div class="btn btn-light del-btn offset-5 book">
+          <% if (currentUser) { %>
+            <!-- Book button triggers JS fetch -->
+            <button type="button" class="btn btn-primary"
+              onclick="bookListing('<%= listing._id %>', '<%= listing.title %>')">
+              Book Now
+            </button>
+          <% } else { %>
+            <!-- Redirect to login -->
+            <a href="/auth/login" class="btn btn-warning">Login first to book</a>
+          <% } %>
+        </div>
+        <hr>
+        <%= listing.description %>
+      </p>
+    </div>
+  </div>
+
+  <div class="btns mb-3 ms-3">
+    <% if (
+      session.user && listing.owner && listing.owner._id.toString() === session.user.id
+      || (session.user && session.user.isAdmin)
+    ) { %>
+      <a href="/listings/<%= listing._id %>/edit" class="btn btn-dark offset-3 btn-warning edit-btn">Edit</a>
+
+      <form method="POST" action="/listings/<%= listing._id %>?_method=DELETE" class="delete-form">
+        <button type="submit" class="btn btn-dark del-btn offset-5">Delete</button>
+      </form>
+    <% } %>
+  </div>
+</div>
+
+<!-- SweetAlert2 script -->
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script>
+  async function bookListing(listingId, title) {
+    try {
+      const res = await fetch(`/bookings/book/${listingId}`, {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        // If you need to send extra data, add body here
+        // body: JSON.stringify({ someData: "value" })
+      });
+
+      const data = await res.json();
+
+      if (data.success) {
+        Swal.fire({
+          title: "Booking Successful!",
+          text: `You booked: ${title}`,
+          icon: "success",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#28a745"
+        }).then(() => {
+          window.location.href = `/listings/${listingId}`; // redirect after OK
+        });
+      } else {
+        Swal.fire({
+          title: "Error",
+          text: data.message,
+          icon: "error",
+          confirmButtonText: "OK",
+          confirmButtonColor: "#dc3545"
+        });
+      }
+    } catch (err) {
+      Swal.fire({
+        title: "Error",
+        text: "Something went wrong while booking.",
+        icon: "error",
+        confirmButtonText: "OK"
+      });
+    }
+  }
+</script>

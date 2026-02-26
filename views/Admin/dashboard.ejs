@@ -1,0 +1,28 @@
+<h1>Admin Dashboard</h1>
+
+<a href="/listings" class="btn btn-primary">Back to Listings</a>
+
+<h2>All Users</h2>
+<ul>
+  <% users.forEach(u => { %>
+    <li><%= u.name %> - <%= u.email %> - Owner: <%= u.isOwner %></li>
+  <% }) %>
+</ul>
+
+<h2>Owners</h2>
+<ul>
+  <% owners.forEach(o => { %>
+    <li><%= o.name %> - <%= o.email %></li>
+  <% }) %>
+</ul>
+
+<h2>Bookings</h2>
+<ul>
+  <% bookings.forEach(b => { %>
+    <li>
+      User: <%= b.userData ? b.userData.name : "Unknown User" %>
+      (<%= b.userData ? b.userData.email : "No Email" %>)
+      booked <%= b.listingData ? b.listingData.title : "Unknown Listing" %>
+    </li>
+  <% }) %>
+</ul>

@@ -1,0 +1,72 @@
+<%= layout("/layouts/boilerplate") %>
+
+<form method="POST" action="/listings" enctype="multipart/form-data" novalidate class="needs-validation">
+  <div class="mb-3">
+    <label for="title" class="form-label">Title</label>
+    <input name="listing[title]" placeholder="Enter title" type="text" class="form-control" required>
+    <div class="invalid-feedback">Please Enter Title!</div>
+    <div class="valid-feedback">Looks good!</div>
+  </div>
+
+  <div class="mb-3">
+    <label for="description" class="form-label">Description</label>
+    <textarea name="listing[description]" placeholder="Description" class="form-control" required></textarea>
+    <div class="invalid-feedback">Please Enter Description!</div>
+    <div class="valid-feedback">Looks good!</div>
+  </div>
+
+  <!-- ✅ Image upload or link -->
+  <div class="mb-3">
+    <label class="form-label">Image (Upload OR Paste Link)</label>
+    <input type="text" name="listing[image]" id="imageLink" placeholder="Enter URL/Link" class="form-control">
+
+    <label for="imageFile" class="form-label">OR Upload File</label>
+    <input type="file" name="image" id="imageFile" accept="image/*" class="form-control">
+
+    <!-- Preview element -->
+    <img id="preview" style="max-width:200px; margin-top:10px; display:none;" />
+  </div>
+
+  <!-- Other fields remain the same -->
+  <div class="row">
+    <div class="mb-3 col-md-4">
+      <label for="price" class="form-label">Price</label>
+      <input name="listing[price]" placeholder="Price" type="number" class="form-control" required>
+    </div>
+    <div class="mb-3 col-md-8">
+      <label for="location" class="form-label">Location</label>
+      <input name="listing[location]" placeholder="Location" type="text" class="form-control" required>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <label for="country" class="form-label">Country</label>
+    <input name="listing[country]" placeholder="Country" type="text" class="form-control" required>
+  </div>
+
+  <button class="btn btn-dark add-btn mt-3">Add</button>
+</form>
+
+<script>
+  // Preview uploaded file
+  document.getElementById("imageFile").addEventListener("change", e => {
+    const file = e.target.files[0];
+    if (file) {
+      const preview = document.getElementById("preview");
+      preview.src = URL.createObjectURL(file);
+      preview.style.display = "block";
+    }
+  });
+
+  // Preview pasted link
+  document.getElementById("imageLink").addEventListener("input", e => {
+    const url = e.target.value;
+    const preview = document.getElementById("preview");
+    if (url) {
+      preview.src = url;
+      preview.style.display = "block";
+    } else {
+      preview.style.display = "none";
+    }
+  });
+</script>

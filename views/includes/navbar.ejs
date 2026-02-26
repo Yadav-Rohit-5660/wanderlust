@@ -1,0 +1,45 @@
+<!-- navbar.ejs -->
+
+  <nav class="navbar navbar-expand-md navbar-light bg-light border-bottom sticky-top">
+    <div class="container-fluid">
+
+      <!-- Brand -->
+      <a class="navbar-brand" href="/listings">
+        <i class="fa-solid fa-hotel"></i>
+      </a>
+
+      <a class="navbar-brand mx-auto" href="/listings">
+        <span class="title">WanderLust</span>
+      </a>
+
+      <!-- Hamburger toggler -->
+      <button class="navbar-toggler" type="button"
+              data-bs-toggle="collapse"
+              data-bs-target="#navbarNavAltMarkup"
+              aria-controls="navbarNavAltMarkup"
+              aria-expanded="false"
+              aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <!-- Collapsible content -->
+      <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+        <ul class="navbar-nav ms-auto ">
+          <% if (currentUser) { %>
+            <li class="nav-item"><span class="nav-link">Welcome, <%= currentUser.name %>!</span></li>
+          <% } else { %>
+            <li class="nav-item" id="loginTab"><a class="nav-link" href="/auth?tab=login">Log in</a></li>
+            <li class="nav-item" id="signupTab"><a class="nav-link" href="/auth?tab=signup">Sign up</a></li>
+          <% } %>
+          <li class="nav-item"><a class="nav-link" href="/listings">Home</a></li>
+          <li class="nav-item"><a class="nav-link" href="/listings/new">Add Place</a></li>
+          <% if (currentUser) { %>
+            <li class="nav-item"><a class="nav-link logout-btn" href="/auth/logout">Logout</a></li>
+          <% } %>
+          <% if (currentUser && currentUser.isAdmin) { %>
+            <li class="nav-item"><a class="nav-link" href="/admin/dashboard">Admin</a></li>
+          <% } %>
+        </ul>
+      </div>
+    </div>
+  </nav>
