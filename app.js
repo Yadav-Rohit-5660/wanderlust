@@ -93,6 +93,8 @@ app.get("/auth", (req, res) => {
 // });
 
 
+app.get("/healthz", (req, res) => res.send("OK"));
+
 // ✅ Error handler
 app.use((err, req, res, next) => {
   let { status = 500, message = "Some Error Occurred" } = err;
