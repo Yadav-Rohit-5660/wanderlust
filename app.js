@@ -16,17 +16,17 @@ const uploadRoutes = require("./routes/upload");
 const adminRoutes = require("./routes/admin");
 const bookingsRouter = require("./routes/booking");
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-
-// ✅ Connect to MongoDB first
 async function main() {
   try {
-    await mongoose.connect(MONGO_URL);
-    console.log("MongoDB connected");
+    await mongoose.connect(process.env.MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    console.log("✅ MongoDB connected");
 
-    // ✅ Only start server after DB connection
-    app.listen(8080, () => {
-      console.log("Server is listening on port 8080");
+    const PORT = process.env.PORT || 8080;
+    app.listen(PORT, () => {
+      console.log(`Server is listening on port ${PORT}`);
     });
   } catch (err) {
     console.error("MongoDB connection error:", err);
