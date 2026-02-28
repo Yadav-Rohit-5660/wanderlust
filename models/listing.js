@@ -8,14 +8,19 @@ const listingSchema = new Schema({
   },
   description: String,
   image: {
-    type: String,
-    default: "https://images.unsplash.com/photo-1618140052121-39fc6db33972?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
-    set: (v) => {
-      // ✅ If empty string, fallback to default
-      if (!v || v === "") {
-        return "https://images.unsplash.com/photo-1618140052121-39fc6db33972?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60";
+    url: {
+      type: String,
+      default: "https://images.unsplash.com/photo-1618140052121-39fc6db33972?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60",
+      set: (v) => {
+        if (!v || v === "") {
+          return "https://images.unsplash.com/photo-1618140052121-39fc6db33972?ixlib=rb-4.0.3&auto=format&fit=crop&w=800&q=60";
+        }
+        return v;
       }
-      return v;
+    },
+    public_id: {
+      type: String,
+      default: null
     }
   },
   price: Number,

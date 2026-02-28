@@ -1,23 +1,31 @@
 const mongoose = require("mongoose");
 const initData = require("./data.js");
 const Listing = require("../models/listing.js");
+require("dotenv").config(); // load .env variables
 
-const MONGO_URL = "mongodb://127.0.0.1:27017/wanderlust";
-
-main().then(() => {
-    console.log("Connected to DB");
-}).catch((err) => {
-    console.log(err);
-});
+// Use Atlas connection string from .env
+const MONGO_URL = process.env.MONGO_URL;
 
 async function main() {
-    await mongoose.connect(MONGO_URL);
+  try {
+    await mongoose.connect(MONGO_URL, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true
+    });
+    console.log("✅ Connected to MongoDB Atlas");
+  } catch (err) {
+    console.error("❌ MongoDB connection error:", err);
+  }
 }
 
 const initDB = async () => {
+  try {
     await Listing.deleteMany({});
     await Listing.insertMany(initData.data);
-    console.log("data was initialized");
-}
+    console.log("✅ Data was initialized");
+  } catch (err) {
+    console.error("❌ Error initializing data:", err);
+  }
+};
 
-initDB();
+main().then(() => initDB());

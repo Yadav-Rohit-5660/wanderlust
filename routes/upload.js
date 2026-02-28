@@ -32,7 +32,8 @@ router.post("/upload", (req, res, next) => {
 
     res.json({
       success: true,
-      url: result.secure_url
+      url: result.secure_url,
+      public_id: result.public_id
     });
   } catch (err) {
     console.error(err);

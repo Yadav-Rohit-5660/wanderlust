@@ -18,14 +18,16 @@ router.post("/", (req, res, next) => {
   });
 }, isOwner, async (req, res) => {
   try {
-    let imagePath = req.body.listing.image; // fallback if user pasted a link
+    let imageData = null;
 
     if (req.file) {
+      // Compress image before upload
       const compressedBuffer = await sharp(req.file.buffer)
         .resize({ width: 1200 })
         .jpeg({ quality: 80 })
         .toBuffer();
 
+      // Upload to Cloudinary
       const result = await new Promise((resolve, reject) => {
         const stream = cloudinary.uploader.upload_stream(
           { folder: "wanderlust_uploads" },
@@ -34,13 +36,20 @@ router.post("/", (req, res, next) => {
         stream.end(compressedBuffer);
       });
 
-      imagePath = result.secure_url;
+      imageData = {
+        url: result.secure_url,
+        public_id: result.public_id
+      };
+    } else if (req.body.listing?.image) {
+      // Fallback if user pasted a link
+      imageData = { url: req.body.listing.image, public_id: null };
     }
 
+    // Create new listing
     const newListing = new Listing({
       ...req.body.listing,
       owner: req.session.user.id,
-      image: imagePath
+      image: imageData
     });
 
     await newListing.save();
@@ -50,8 +59,6 @@ router.post("/", (req, res, next) => {
     res.status(500).send("Error: " + err.message);
   }
 });
-
-
 
 // INDEX – show all listings
 router.get("/", async (req, res) => {
