@@ -3,3 +3,5 @@
 
 # Ignore uploads folder
 /uploads
+
+/node_modules
