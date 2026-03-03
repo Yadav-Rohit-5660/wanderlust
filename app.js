@@ -10,6 +10,7 @@ const flash = require("connect-flash");
 require("dotenv").config();
 
 // Routes
+const Listing = require("./models/listing");
 const authRoutes = require("./routes/auth");
 const listingsRoutes = require("./routes/listings");
 const uploadRoutes = require("./routes/upload");
@@ -71,8 +72,9 @@ app.use("/files", uploadRoutes);
 app.use("/admin", adminRoutes);
 app.use("/bookings", bookingsRouter);
 
-app.get("/", (req, res) => {
-  res.render("auth");
+app.get("/", async (req, res) => {
+  const allListings = await Listing.find({});
+  res.render("listings/index", { allListings });
 });
 
 // Auth route
