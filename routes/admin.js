@@ -17,7 +17,7 @@ router.get("/dashboard", isAdmin, async (req, res) => {
     res.render("admin/dashboard", { users, owners, bookings });
   } catch (err) {
     req.flash("error", "Error loading dashboard: " + err.message);
-    res.redirect("/listings");
+    res.redirect("/");
   }
 });
 
